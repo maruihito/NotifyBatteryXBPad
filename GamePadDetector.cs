@@ -35,12 +35,10 @@ namespace NotifyBatteryXBPad
                         return true;
                     }
                 }
-                else
-                {
-                    // 前回認識済みのゲームパッドが切断されたとみなす
-                    GamepadIndex = null;
-                }
             }
+
+            // 前回認識済みのゲームパッドが切断されたとみなす
+            GamepadIndex = null;
 
             // 0 ～ 3 の順で有効なゲームパッドを探す
             for (var i = 0; i < 4; ++i)
