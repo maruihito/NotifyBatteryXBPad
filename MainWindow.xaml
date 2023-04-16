@@ -5,15 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NotifyBatteryXBPad"
         mc:Ignorable="d"
-        Title="NotifyBatteryXBPad" Height="281" Width="444" ResizeMode="NoResize">
+        Title="NotifyBatteryXBPad" Height="303" Width="429" ResizeMode="NoResize">
     <Grid Margin="0,0,10,-6">
         <Image x:Name="GamePadImage" Height="104" Margin="37,23,0,0" Source="resources/controller-1827840.png" Stretch="Fill" Width="151" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Button x:Name="ChkButton" Content="UPDATE" HorizontalAlignment="Left" Margin="263,187,0,0" VerticalAlignment="Top" FontSize="16" Click="ChkButton_Click" Height="47" Width="128" FontFamily="ROG Fonts"/>
+        <Button x:Name="ChkButton" Content="今すぐ確認" HorizontalAlignment="Left" Margin="263,187,0,0" VerticalAlignment="Top" FontSize="16" Click="ChkButton_Click" Height="35" Width="116" FontFamily="ROG Fonts"/>
         <TextBlock x:Name="BatteryEmptyTextBlock" HorizontalAlignment="Left" Margin="263,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="163" FontSize="24" FontFamily="ROG Fonts" Foreground="#40000000"><Run Language="ja-jp" Text="Empty"/></TextBlock>
-        <TextBlock x:Name="DetectTextBlock" HorizontalAlignment="Left" Margin="10,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="53" Width="238" FontSize="24" FontFamily="ROG Fonts"><Run Language="ja-jp" Text="No Detected."/></TextBlock>
+        <TextBlock x:Name="DetectTextBlock" HorizontalAlignment="Left" Margin="10,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="38" Width="238" FontSize="24" FontFamily="ROG Fonts"><Run Language="ja-jp" Text="No Detected."/></TextBlock>
         <TextBlock x:Name="BatteryLowTextBlock" HorizontalAlignment="Left" Margin="263,94,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="163" FontSize="24" FontFamily="ROG Fonts" Foreground="#40000000"><Run Language="ja-jp" Text="Low"/></TextBlock>
         <TextBlock x:Name="BatteryMediumTextBlock" HorizontalAlignment="Left" Margin="263,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="163" FontSize="24" FontFamily="ROG Fonts" Foreground="#40000000"><Run Language="ja-jp" Text="Medium"/></TextBlock>
         <TextBlock x:Name="BatteryFullTextBlock" HorizontalAlignment="Left" Margin="263,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="163" FontSize="24" FontFamily="ROG Fonts" Foreground="#40000000"><Run Language="ja-jp" Text="Full"/></TextBlock>
+        <Label x:Name="textLabel" Content="分毎にチェック" HorizontalAlignment="Left" Margin="64,197,0,0" VerticalAlignment="Top" Width="130"/>
+        <Label x:Name="CreditLabel" Content="©VOICEVOX:ずんだもん" Height="26" Margin="281,240,10,0" VerticalAlignment="Top" Foreground="#A0000000" FontSize="10"/>
+        <Slider x:Name="MinuteSlider" HorizontalAlignment="Left" Margin="37,228,0,0" VerticalAlignment="Top" Width="120" Minimum="1" Maximum="60" ValueChanged="MinuteSlider_ValueChanged" SmallChange="1" LargeChange="10" Value="30"/>
+        <TextBlock x:Name="MinuteTextBlock" HorizontalAlignment="Left" Margin="47,202,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="22"><Run Language="ja-jp" Text="30"/></TextBlock>
 
     </Grid>
 </Window>

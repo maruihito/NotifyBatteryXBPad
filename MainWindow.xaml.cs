@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using Vortice.XInput;
 
 namespace NotifyBatteryXBPad
@@ -21,14 +23,24 @@ namespace NotifyBatteryXBPad
     /// </summary>
     public partial class MainWindow : Window
     {
+        // タイマのインスタンス
+        private DispatcherTimer _timer;
 
+        // ゲームパッド検出クラス
         GamePadDetector gpd = new GamePadDetector();
+
+        // 音声再生クラス
+        AnotateButteryStatus abs = new AnotateButteryStatus();
 
         public MainWindow()
         {
             InitializeComponent();
 
+            this.MinuteTextBlock.Text = "30";
             this.ResetText();
+
+            this.SetupTimer();
+
         }
 
         private void ChkButton_Click(object sender, RoutedEventArgs e)
@@ -36,10 +48,44 @@ namespace NotifyBatteryXBPad
             UpdateXPadStatus();
         }
 
+        // タイマを設定する
+        private void SetupTimer()
+        {
+            // GUIの設定を読み取り
+            int valminute = (int)MinuteSlider.Value;
+
+            // タイマのインスタンスを生成
+            _timer = new DispatcherTimer(); // 優先度はDispatcherPriority.Background
+                                            // インターバルを設定
+            _timer.Interval = new TimeSpan(0, valminute, 0);
+            // タイマメソッドを設定
+            _timer.Tick += new EventHandler(MyTimerMethod);
+            // タイマを開始
+            _timer.Start();
+
+            // 画面が閉じられるときに、タイマを停止
+            this.Closing += new CancelEventHandler(StopTimer);
+        }
+
+        // タイマメソッド
+        private void MyTimerMethod(object sender, EventArgs e)
+        {
+            // ゲームパッド情報の更新
+            UpdateXPadStatus();
+
+        }
+
+        // タイマを停止
+        private void StopTimer(object sender, CancelEventArgs e)
+        {
+            _timer.Stop();
+        }
+
         private void UpdateXPadStatus()
         {
+            Task.WaitAll();
 
-            if(gpd.GetBatterystate())
+            if (gpd.GetBatterystate())
             {
                 // public enum BatteryLevel : byte
                 // {
@@ -57,10 +103,29 @@ namespace NotifyBatteryXBPad
 
                 DetectTextBlock.Text = "Detected.";
                 DetectTextBlock.Foreground = new SolidColorBrush(Colors.Black);
+
+                if(balevel == (byte)0)
+                {
+                    Task.Run(abs.PlayWavEmp);
+                }
+                else if(balevel == (byte)1)
+                {
+                    Task.Run(abs.PlayWavLow);
+                }
+                else if (balevel == (byte)2)
+                {
+                    Task.Run(abs.PlayWavMid);
+                }
+                else if((balevel == (byte)3))
+                {
+                    Task.Run(abs.PlayWavFull);
+                }
             }
             else
             {
                 this.ResetText();
+
+                Task.Run(abs.PlayWavNodet);
             }
 
 
@@ -74,6 +139,24 @@ namespace NotifyBatteryXBPad
             BatteryEmptyTextBlock.Foreground = new SolidColorBrush(Colors.LightGray);
             DetectTextBlock.Text = "No detected.";
             DetectTextBlock.Foreground = new SolidColorBrush(Colors.LightGray);
+        }
+
+        private void MinuteSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if(MinuteTextBlock == null)
+            {
+                return;
+            }
+            int minval = (int)MinuteSlider.Value;
+            MinuteTextBlock.Text = minval.ToString();
+
+            if (_timer != null)
+            {
+                _timer.Stop();
+            }
+
+            SetupTimer();
+
         }
     }
 }
