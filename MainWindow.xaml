@@ -1,12 +1,19 @@
-﻿<Window x:Class="NotifyBatteryXBPad.MainWindow"
+﻿<Window x:Name="NotifyBatteryXBPad" x:Class="NotifyBatteryXBPad.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NotifyBatteryXBPad"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="281" Width="444" ResizeMode="NoResize">
+    <Grid Margin="0,0,10,-6">
+        <Image x:Name="GamePadImage" Height="104" Margin="37,23,0,0" Source="/controller-1827840.png" Stretch="Fill" Width="151" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button x:Name="ChkButton" Content="UPDATE" HorizontalAlignment="Left" Margin="263,187,0,0" VerticalAlignment="Top" FontSize="16" Click="ChkButton_Click" Height="47" Width="128" FontFamily="ROG Fonts"/>
+        <TextBlock x:Name="BatteryEmptyTextBlock" HorizontalAlignment="Left" Margin="263,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="163" FontSize="24" FontFamily="ROG Fonts" Foreground="#40000000"><Run Language="ja-jp" Text="Empty"/></TextBlock>
+        <TextBlock x:Name="DetectTextBlock" HorizontalAlignment="Left" Margin="10,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="53" Width="238" FontSize="24" FontFamily="ROG Fonts"><Run Language="ja-jp" Text="No Detected."/></TextBlock>
+        <TextBlock x:Name="BatteryLowTextBlock" HorizontalAlignment="Left" Margin="263,94,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="163" FontSize="24" FontFamily="ROG Fonts" Foreground="#40000000"><Run Language="ja-jp" Text="Low"/></TextBlock>
+        <TextBlock x:Name="BatteryMediumTextBlock" HorizontalAlignment="Left" Margin="263,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="163" FontSize="24" FontFamily="ROG Fonts" Foreground="#40000000"><Run Language="ja-jp" Text="Medium"/></TextBlock>
+        <TextBlock x:Name="BatteryFullTextBlock" HorizontalAlignment="Left" Margin="263,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="163" FontSize="24" FontFamily="ROG Fonts" Foreground="#40000000"><Run Language="ja-jp" Text="Full"/></TextBlock>
 
     </Grid>
 </Window>

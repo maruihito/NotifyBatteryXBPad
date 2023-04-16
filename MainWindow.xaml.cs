@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Vortice.XInput;
 
 namespace NotifyBatteryXBPad
 {
@@ -20,9 +21,56 @@ namespace NotifyBatteryXBPad
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        GamePadDetector gpd = new GamePadDetector();
+
         public MainWindow()
         {
             InitializeComponent();
+
+            BatteryFullTextBlock.Foreground = new SolidColorBrush(Colors.LightGray);
+            BatteryMediumTextBlock.Foreground = new SolidColorBrush(Colors.LightGray);
+            BatteryLowTextBlock.Foreground = new SolidColorBrush(Colors.LightGray);
+            BatteryEmptyTextBlock.Foreground = new SolidColorBrush(Colors.LightGray);
+        }
+
+        private void ChkButton_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateXPadStatus();
+        }
+
+        private void UpdateXPadStatus()
+        {
+
+            if(gpd.GetBatterystate())
+            {
+                // public enum BatteryLevel : byte
+                // {
+                //     Empty,  //  0
+                //     Low,    //  1
+                //     Medium, //  2
+                //     Full    //  3
+                // }
+                byte balevel = (byte)gpd.BaLevel;
+
+                BatteryFullTextBlock.Foreground   = (balevel == (byte)3) ? new SolidColorBrush(Colors.Black) : new SolidColorBrush(Colors.LightGray);
+                BatteryMediumTextBlock.Foreground = (balevel == (byte)2) ? new SolidColorBrush(Colors.Black) : new SolidColorBrush(Colors.LightGray);
+                BatteryLowTextBlock.Foreground    = (balevel == (byte)1) ? new SolidColorBrush(Colors.Black) : new SolidColorBrush(Colors.LightGray);
+                BatteryEmptyTextBlock.Foreground  = (balevel == (byte)0) ? new SolidColorBrush(Colors.Black) : new SolidColorBrush(Colors.LightGray);
+
+                DetectTextBlock.Text = "Detected.";
+            }
+            else
+            {
+                BatteryFullTextBlock.Foreground   = new SolidColorBrush(Colors.LightGray);
+                BatteryMediumTextBlock.Foreground = new SolidColorBrush(Colors.LightGray);
+                BatteryLowTextBlock.Foreground    = new SolidColorBrush(Colors.LightGray);
+                BatteryEmptyTextBlock.Foreground  = new SolidColorBrush(Colors.LightGray);
+                DetectTextBlock.Text = "No detected.";
+            }
+
+
+
         }
     }
 }

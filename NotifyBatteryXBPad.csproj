@@ -8,4 +8,18 @@
     <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="controller-1827840.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Vortice.XInput" Version="2.4.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="controller-1827840.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
 </Project>
