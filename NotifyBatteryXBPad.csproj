@@ -9,6 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="resources\001_zunda_full.wav" />
+    <None Remove="resources\002_zunda_mid.wav" />
+    <None Remove="resources\003_zunda_low.wav" />
+    <None Remove="resources\004_zunda_emp.wav" />
+    <None Remove="resources\005_zunda_nodet.wav" />
     <None Remove="resources\controller-1827840.png" />
   </ItemGroup>
 
@@ -17,6 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="resources\001_zunda_full.wav" />
+    <Resource Include="resources\002_zunda_mid.wav" />
+    <Resource Include="resources\003_zunda_low.wav" />
+    <Resource Include="resources\004_zunda_emp.wav" />
+    <Resource Include="resources\005_zunda_nodet.wav" />
     <Resource Include="resources\controller-1827840.png" />
   </ItemGroup>
 
