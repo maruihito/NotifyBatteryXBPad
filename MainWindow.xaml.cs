@@ -28,10 +28,7 @@ namespace NotifyBatteryXBPad
         {
             InitializeComponent();
 
-            BatteryFullTextBlock.Foreground = new SolidColorBrush(Colors.LightGray);
-            BatteryMediumTextBlock.Foreground = new SolidColorBrush(Colors.LightGray);
-            BatteryLowTextBlock.Foreground = new SolidColorBrush(Colors.LightGray);
-            BatteryEmptyTextBlock.Foreground = new SolidColorBrush(Colors.LightGray);
+            this.ResetText();
         }
 
         private void ChkButton_Click(object sender, RoutedEventArgs e)
@@ -59,18 +56,24 @@ namespace NotifyBatteryXBPad
                 BatteryEmptyTextBlock.Foreground  = (balevel == (byte)0) ? new SolidColorBrush(Colors.Black) : new SolidColorBrush(Colors.LightGray);
 
                 DetectTextBlock.Text = "Detected.";
+                DetectTextBlock.Foreground = new SolidColorBrush(Colors.Black);
             }
             else
             {
-                BatteryFullTextBlock.Foreground   = new SolidColorBrush(Colors.LightGray);
-                BatteryMediumTextBlock.Foreground = new SolidColorBrush(Colors.LightGray);
-                BatteryLowTextBlock.Foreground    = new SolidColorBrush(Colors.LightGray);
-                BatteryEmptyTextBlock.Foreground  = new SolidColorBrush(Colors.LightGray);
-                DetectTextBlock.Text = "No detected.";
+                this.ResetText();
             }
 
 
+        }
 
+        private void ResetText()
+        {
+            BatteryFullTextBlock.Foreground = new SolidColorBrush(Colors.LightGray);
+            BatteryMediumTextBlock.Foreground = new SolidColorBrush(Colors.LightGray);
+            BatteryLowTextBlock.Foreground = new SolidColorBrush(Colors.LightGray);
+            BatteryEmptyTextBlock.Foreground = new SolidColorBrush(Colors.LightGray);
+            DetectTextBlock.Text = "No detected.";
+            DetectTextBlock.Foreground = new SolidColorBrush(Colors.LightGray);
         }
     }
 }
