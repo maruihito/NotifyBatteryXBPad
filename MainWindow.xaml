@@ -14,10 +14,18 @@
         <TextBlock x:Name="BatteryLowTextBlock" HorizontalAlignment="Left" Margin="263,94,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="163" FontSize="24" FontFamily="ROG Fonts" Foreground="#40000000"><Run Language="ja-jp" Text="Low"/></TextBlock>
         <TextBlock x:Name="BatteryMediumTextBlock" HorizontalAlignment="Left" Margin="263,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="163" FontSize="24" FontFamily="ROG Fonts" Foreground="#40000000"><Run Language="ja-jp" Text="Medium"/></TextBlock>
         <TextBlock x:Name="BatteryFullTextBlock" HorizontalAlignment="Left" Margin="263,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="163" FontSize="24" FontFamily="ROG Fonts" Foreground="#40000000"><Run Language="ja-jp" Text="Full"/></TextBlock>
-        <Label x:Name="textLabel" Content="分毎にチェック" HorizontalAlignment="Left" Margin="64,197,0,0" VerticalAlignment="Top" Width="130"/>
+        <Label x:Name="textLabel" Content="分毎にチェック" HorizontalAlignment="Left" Margin="54,192,0,0" VerticalAlignment="Top" Width="93"/>
         <Label x:Name="CreditLabel" Content="©VOICEVOX:ずんだもん" Height="26" Margin="281,240,10,0" VerticalAlignment="Top" Foreground="#A0000000" FontSize="10"/>
-        <Slider x:Name="MinuteSlider" HorizontalAlignment="Left" Margin="37,228,0,0" VerticalAlignment="Top" Width="120" Minimum="1" Maximum="60" ValueChanged="MinuteSlider_ValueChanged" SmallChange="1" LargeChange="10" Value="30"/>
-        <TextBlock x:Name="MinuteTextBlock" HorizontalAlignment="Left" Margin="47,202,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="22"><Run Language="ja-jp" Text="30"/></TextBlock>
+        <Slider x:Name="MinuteSlider" HorizontalAlignment="Left" Margin="27,223,0,0" VerticalAlignment="Top" Width="120" Minimum="1" Maximum="60" ValueChanged="MinuteSlider_ValueChanged" SmallChange="1" LargeChange="10" Value="30"/>
+        <TextBlock x:Name="MinuteTextBlock" HorizontalAlignment="Left" Margin="37,197,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="22"><Run Language="ja-jp" Text="30"/></TextBlock>
+        <Label x:Name="textVolLabel" Content="音量" HorizontalAlignment="Left" Margin="181,192,0,0" VerticalAlignment="Top" Width="41"/>
+        <ComboBox x:Name="VolComboBox" HorizontalAlignment="Left" Margin="174,219,0,0" VerticalAlignment="Top" Width="54">
+            <ComboBoxItem Content="0"/>
+            <ComboBoxItem Content="25"/>
+            <ComboBoxItem Content="50"/>
+            <ComboBoxItem Content="75"/>
+            <ComboBoxItem Content="100"/>
+        </ComboBox>
 
     </Grid>
 </Window>

@@ -7,18 +7,18 @@ using Vortice.XInput;
 
 namespace NotifyBatteryXBPad
 {
-    public class GamePadDetector
+    public class GamePadDetector : IDisposable
     {
         public int? GamepadIndex { get; set; }
         public BatteryInformation BaInfo { get; set; }
 
         public BatteryLevel BaLevel { get; set; }
 
-        public GamePadDetector()
+        public GamePadDetector(int? gindex)
         {
             // コンストラクタ
             BaLevel = BatteryLevel.Empty;
-            GamepadIndex = null;
+            GamepadIndex = gindex;
         }
 
         public bool GetBatterystate()
@@ -57,6 +57,11 @@ namespace NotifyBatteryXBPad
             
             // ゲームパッドが見つからなかったことを報告
             return false;
+        }
+
+        public void Dispose()
+        {
+
         }
     }
 }

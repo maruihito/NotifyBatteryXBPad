@@ -26,8 +26,7 @@ namespace NotifyBatteryXBPad
         // タイマのインスタンス
         private DispatcherTimer _timer;
 
-        // ゲームパッド検出クラス
-        GamePadDetector gpd = new GamePadDetector();
+        int? GamepadIndex = null;
 
         // 音声再生クラス
         AnotateButteryStatus abs = new AnotateButteryStatus();
@@ -41,6 +40,8 @@ namespace NotifyBatteryXBPad
 
             this.SetupTimer();
 
+            // 音量は50に設定
+            VolComboBox.SelectedIndex = 2;
         }
 
         private void ChkButton_Click(object sender, RoutedEventArgs e)
@@ -83,7 +84,13 @@ namespace NotifyBatteryXBPad
 
         private void UpdateXPadStatus()
         {
+            GamePadDetector gpd = new GamePadDetector(GamepadIndex);
+
             Task.WaitAll();
+            string? volumestr = VolComboBox.SelectedItem.ToString();
+            string[] volumestrsp = volumestr.Split(':');
+
+            abs.SoundVolume = (byte)Convert.ToInt32(volumestrsp[1]);
 
             if (gpd.GetBatterystate())
             {
@@ -128,7 +135,10 @@ namespace NotifyBatteryXBPad
                 Task.Run(abs.PlayWavNodet);
             }
 
+            // ゲームパッドの識別番号を記憶してインスタンスは閉じる
+            GamepadIndex = gpd.GamepadIndex;
 
+            gpd.Dispose();
         }
 
         private void ResetText()

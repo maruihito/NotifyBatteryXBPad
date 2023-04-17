@@ -4,13 +4,17 @@ using System.Collections.Generic;
 using System.Formats.Tar;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Media;
 
 namespace NotifyBatteryXBPad
 {
     public class AnotateButteryStatus
     {
+        public byte SoundVolume { get; set; }
+
         // 音声ファイル定義
         UnmanagedMemoryStream WAVFULL = Resources.s001_zunda_full;
         UnmanagedMemoryStream WAVMID = Resources.s002_zunda_mid;
@@ -18,7 +22,14 @@ namespace NotifyBatteryXBPad
         UnmanagedMemoryStream WAVEMP = Resources.s004_zunda_emp;
         UnmanagedMemoryStream WAVNODET = Resources.s005_zunda_nodet;
 
-        private System.Media.SoundPlayer? player = null;
+        private SoundPlayer? player = null;
+
+        public AnotateButteryStatus()
+        {
+            // コンストラクタ
+            SoundVolume = 50;
+        }
+
 
         public void PlayWavFull()
         {
@@ -48,8 +59,13 @@ namespace NotifyBatteryXBPad
         {
             wavfile.Position = 0;           // Manually rewind stream 
             StopWaveFile();                 // Then we have to set stream to null 
-            player = new System.Media.SoundPlayer(wavfile);
-            player.Play();
+            var wavstream = new WaveStream(wavfile);
+            wavstream.Volume = SoundVolume;
+
+            using (player = new SoundPlayer(wavstream))
+            {
+                player.Play();
+            }
         }
 
         public void StopWaveFile()
